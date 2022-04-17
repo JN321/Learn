@@ -5,9 +5,8 @@ function add() {
     arr = [...arr, ...arguments];
     return resultFn;
   };
-  resultFn.toString = function () {
-    return arr.reduce((prev, current) => prev + current);
-  };
+  resultFn.toString = () => arr.reduce((prev, current) => prev + current);
+
   return resultFn;
 }
 
