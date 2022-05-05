@@ -16,12 +16,15 @@
   - 转换语法、编译降级
   - 通过`polyfill`的方式在目标环境中添加缺失的特性(babel7 中通过 @babel/polyfill 不过在 babel7 中处于被废弃的状态，其功能被 core.js 所取代)
 - 为什么？浏览器作为一个客户侧的产品，对 js 新语法的支持存在滞后性。同一个浏览器的不同版本以及不同的浏览器之间对 js 的支持都会存在很多的差异，所以需要 babel 对 js 语言做`编译降级`
+- @babel/babel-cli 有啥用？提供了可以通过控制台输入相关指令的功能，例如：npx babel src --out-dir lib // 将 src 文件夹打包输出至 lib 文件夹。
 
 #### babel 的构建流程
 
 - bebel 的功能一直都非常明确：将源码中的新语法和 API 转换为目标浏览器所支持的语法。并且，所有转化的功能都是通过插件来实现的。
 - 构建流程：parse -> transfrom -> generator 三步。parse 将源码转为 AST，transform 对 AST 进行转化，generator 将 AST 转化为目标代码，并且生成 sourcemap。
 - 什么是 sourcemap？：Sourcemap 本质上是一个信息文件，里面储存着代码转换前后的对应位置信息。它记录了转换压缩后的代码所对应的转换前的源代码位置，是源代码和生产代码的映射。 Sourcemap 解决了在打包过程中，代码经过压缩，去空格以及 babel 编译转化后，由于代码之间差异性过大，造成无法 debug 的问题。
+
+> 在 transform 阶段，会应用各种内置的插件来完成 AST 的转换。内置插件做的转换包括两部分，一是把不支持的语法转成目标环境支持的语法来实现相同功能，二是不支持的 api 自动引入对应的 polyfill。
 
 #### babel6 和 babel 7
 
@@ -44,6 +47,7 @@ stage4：...
 
 - babel7 解决了 babel6 的痛点，只需要配置`@babel/preset-env`模块，经过简单的配置，就可以轻松的完成对不同浏览器的兼容。通过动态的引入`polyfill`，从而实现了`boudle size`的最小化。
 - [babel 中文文档](https://babel.docschina.org/repl/)可以试一下，不同浏览器中，babel 对 js 代码的转义降级情况。以 async 为例。
+- babel7 中的`polyfill`是通过`core-js`动态引入的。如果包含了需要转换的 API，则会自动的引入所需的`core-js`文件，从而实现浏览器对新 API 的支持。
 
 #### 箭头函数的细节
 
