@@ -8,37 +8,36 @@
 </template>
 
 <script>
-
 export default {
-  name: 'SlotChild',
+  name: "SlotChild",
   props: {
-    msg: String
+    msg: String,
   },
-  data: function() {
+  data: function () {
     return {
       num: 0,
-      slotProps: '子组件自己的数据'
-    }
+      slotProps: "子组件自己的数据",
+    };
   },
   computed: {
-    addNum () {
-      return this.num + 1
-    }
+    addNum() {
+      return this.num + 1;
+    },
   },
   created() {
-    console.log('created', 1);
+    console.log("created", 1);
     this.$nextTick(() => {
-      console.log('nextTick: 1');
-    })
+      console.log("nextTick: 1");
+    });
   },
   updated() {
-    console.log('uptated', 1);
+    console.log("uptated", 1);
     this.$nextTick(() => {
-      console.log('nextTick: 2');
-    })
-    // this.num ++ 
-  }
-}
+      console.log("nextTick: 2");
+    });
+    // this.num ++
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

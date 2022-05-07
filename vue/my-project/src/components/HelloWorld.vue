@@ -1,66 +1,76 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <h1 @click="() => {this.num++}">{{ num }}</h1>
+    <h1
+      @click="
+        () => {
+          this.num++;
+        }
+      "
+    >
+      {{ num }}
+    </h1>
     <div v-if="num">if</div>
-    <div v-show="num" >show</div>
-    <div>computed: {{addNum}}</div>
-    <div> ------------- 插槽 -------------- </div>
+    <div v-show="num">show</div>
+    <div>computed: {{ addNum }}</div>
+    <div>------------- 插槽 --------------</div>
     <SlotChild>
       <p>普通插槽{{ slotText }}</p>
-      <template v-slot:header>具名插槽{{header}}</template>
+      <template v-slot:header>具名插槽{{ header }}</template>
       <!-- 老写法 -->
-      <div slot="content" slot-scope="{slotProps}">作用域插槽--{{slotProps}}</div>
+      <div slot="content" slot-scope="{ slotProps }">
+        作用域插槽--{{ slotProps }}
+      </div>
       <!-- 新写法 -->
       <!-- <template v-slot:slotProps="slotProps" >作用域插槽{{slotProps}}</template> -->
     </SlotChild>
     <div>---- 过滤器 ----</div>
-    {{ money | moneyFilter  }}
+    {{ money | moneyFilter }}
   </div>
 </template>
 
 <script>
-import SlotChild from './SlotChild'
+import SlotChild from "./SlotChild";
 export default {
-  name: 'HelloWorld',
+  name: "HelloWorld",
   components: {
-    SlotChild
+    SlotChild,
   },
   props: {
-    msg: String
+    msg: String,
   },
-  data: function() {
+  data: function () {
     return {
       num: 0,
-      slotText: 'my slot',
-      header: 'there is header',
-      money: 100
-    }
+      slotText: "my slot",
+      header: "there is header",
+      money: 100,
+    };
   },
   computed: {
-    addNum () {
-      return this.num + 1
-    }
+    addNum() {
+      return this.num + 1;
+    },
   },
   filters: {
     moneyFilter(money) {
-      return  money > 99 ? '99元' : '1111111' 
-    }
+      return money > 99 ? "99元" : "1111111";
+    },
   },
   created() {
-    console.log('created', 1);
+    console.log("created", 1);
     this.$nextTick(() => {
-      console.log('nextTick: 1');
-    })
+      console.log("nextTick: 1");
+    });
   },
   updated() {
-    console.log('uptated', 1);
+    console.log("uptated", 1);
     this.$nextTick(() => {
-      console.log('nextTick: 2');
-    })
-    // this.num ++ 
-  }
-}
+      console.log("nextTick: 2");
+    });
+    // this.num ++
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

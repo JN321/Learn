@@ -8,12 +8,21 @@
 
 - vue
   - Vetur
-- Prettier - Code formatter
+- ~~Prettier - Code formatter~~
 - Path Intellisense
 - Code Runner
 - Auto Rename Tag
 - Auto Close Tag
 - [Deprecated] Bracket Pair Colorizer 2
+##### settings.json
+```js
+{
+  "window.zoomLevel": 1,
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true, // eslint保存格式化，
+  "javascript.format.enable": false, // 不启动JavaScript自动格式化
+}
+```
 
 #### mac git
 
