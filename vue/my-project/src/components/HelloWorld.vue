@@ -5,23 +5,46 @@
     <div v-if="num">if</div>
     <div v-show="num" >show</div>
     <div>computed: {{addNum}}</div>
+    <div> ------------- 插槽 -------------- </div>
+    <SlotChild>
+      <p>普通插槽{{ slotText }}</p>
+      <template v-slot:header>具名插槽{{header}}</template>
+      <!-- 老写法 -->
+      <div slot="content" slot-scope="{slotProps}">作用域插槽--{{slotProps}}</div>
+      <!-- 新写法 -->
+      <!-- <template v-slot:slotProps="slotProps" >作用域插槽{{slotProps}}</template> -->
+    </SlotChild>
+    <div>---- 过滤器 ----</div>
+    {{ money | moneyFilter  }}
   </div>
 </template>
 
 <script>
+import SlotChild from './SlotChild'
 export default {
   name: 'HelloWorld',
+  components: {
+    SlotChild
+  },
   props: {
     msg: String
   },
   data: function() {
     return {
-      num: 0
+      num: 0,
+      slotText: 'my slot',
+      header: 'there is header',
+      money: 100
     }
   },
   computed: {
     addNum () {
       return this.num + 1
+    }
+  },
+  filters: {
+    moneyFilter(money) {
+      return  money > 99 ? '99元' : '1111111' 
     }
   },
   created() {
