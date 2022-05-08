@@ -26,13 +26,20 @@
     </SlotChild>
     <div>---- 过滤器 ----</div>
     {{ money | moneyFilter }}
+    <div>----- minxin -----</div>
+    <div>这里是mixin - {{ mixinName }}</div>
+    <div>{{ mixinobj.name }}-{{ mixinobj.age }}-{{ mixinobj.color }}</div>
+    <div>----- extend -----</div>
+    <div>{{ baseText }}</div>
   </div>
 </template>
 
 <script>
 import SlotChild from "./SlotChild";
+import demoMixin from "../fregments/demoMixin";
 export default {
   name: "HelloWorld",
+  mixins: [demoMixin],
   components: {
     SlotChild,
   },
@@ -45,6 +52,10 @@ export default {
       slotText: "my slot",
       header: "there is header",
       money: 100,
+      mixinobj: {
+        name: "xiaoming",
+        age: "19",
+      },
     };
   },
   computed: {
