@@ -72,7 +72,7 @@ help()
 /**
  * Settings. 获取用户传递信息
  */
-// 用户输入的模板名称 在vue init的时候，终端录入的字段
+// 用户输入的模板名称 在vue init的时候，终端录入的字段，例如 vue init webpack my-project
 let template = program.args[0]
 // 包含斜杠 包含'/'目录是从github上拿取得
 const hasSlash = template.indexOf('/') > -1
@@ -89,7 +89,7 @@ const clone = program.clone || false
 
 // 本地模板路径 - ~/.vue-templates/
 const tmp = path.join(home, '.vue-templates', template.replace(/[\/:]/g, '-'))
-// 使用离线模板逻辑
+// 使用离线模板逻辑 - 使用缓存中的模板
 if (program.offline) {
   console.log(`> Use cached template at ${chalk.yellow(tildify(tmp))}`)
   template = tmp
@@ -133,7 +133,7 @@ function run () {
     // ~/.vue-template
     // 获取绝对路径
     const templatePath = getTemplatePath(template)
-    // 判断模板路径本地存在
+    // 判断模板路径本地存在文件
     if (exists(templatePath)) {
       // 根据模板生成
       generate(name, templatePath, to, err => {
