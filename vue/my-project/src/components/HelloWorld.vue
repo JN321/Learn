@@ -31,12 +31,17 @@
     <div>{{ mixinobj.name }}-{{ mixinobj.age }}-{{ mixinobj.color }}</div>
     <div>----- extend -----</div>
     <div>{{ baseText }}</div>
+    <div>------------- vuex -------------</div>
+    <div>{{ nodeInfor1.name }}</div>
+    <div>{{ getNodeInfor.name }}</div>
+    <div>{{ myNodeInfor.name }}</div>
   </div>
 </template>
 
 <script>
 import SlotChild from "./SlotChild";
 import demoMixin from "../fregments/demoMixin";
+import { mapState } from "vuex";
 export default {
   name: "HelloWorld",
   mixins: [demoMixin],
@@ -58,10 +63,24 @@ export default {
       },
     };
   },
+  methods: {
+    setNodeInfor(params) {
+      setTimeout(() => {
+        this.$store.dispatch("setNodeInfor", { ...params });
+      }, 2000);
+    },
+  },
   computed: {
     addNum() {
       return this.num + 1;
     },
+    getNodeInfor() {
+      return this.$store.state.nodeInfor2;
+    },
+    ...mapState(["nodeInfor1"]), // 不能改名字
+    ...mapState({
+      myNodeInfor: (state) => state.nodeInfor1,
+    }),
   },
   filters: {
     moneyFilter(money) {
@@ -73,6 +92,7 @@ export default {
     this.$nextTick(() => {
       console.log("nextTick: 1");
     });
+    this.setNodeInfor({ name: "new vuex" });
   },
   updated() {
     console.log("uptated", 1);
