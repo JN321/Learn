@@ -21,7 +21,7 @@ export class Store {
       assert(Vue, `must call Vue.use(Vuex) before creating a store instance.`)
       // 当前环境无法使用promise
       assert(typeof Promise !== 'undefined', `vuex requires a Promise polyfill in this browser.`)
-      // Store必须使用new实例化调用
+      // Store必须使用new实例化调用，不操作类，去操作实例。
       assert(this instanceof Store, `store must be called with the new operator.`)
     }
 
@@ -32,7 +32,7 @@ export class Store {
     } = options
 
     // store internal state
-    // 内部state
+    // 内部state状态
     this._committing = false
     // 存放处理后的用户自定义actions
     this._actions = Object.create(null)
@@ -42,19 +42,19 @@ export class Store {
     this._mutations = Object.create(null)
     // 存放处理后的用户自定义getters
     this._wrappedGetters = Object.create(null)
-    // 模块收集器 - 树形结构
+    // 模块收集器 - 用来构造树形结构
     this._modules = new ModuleCollection(options)
     // 模块命名空间对应关系
     this._modulesNamespaceMap = Object.create(null)
     // 订阅列表
     this._subscribers = []
-    // 响应式$watcher
+    // 响应式$watcher，之所以能做到响应式，就是依赖了vue的功能，其本质就是vue的实例。
     this._watcherVM = new Vue()
     // 本地化getters存储
     this._makeLocalGettersCache = Object.create(null)
 
     // 面试题 - Object.create(null) 和 {} 区别 => 原型链
-    // Object.create(null).__proto__ 为undefined
+    // Object.create(null).__proto__ 为 undefined
     // ({}).__proto__ 是Object.prototype
 
     // const rawObj = {
@@ -365,11 +365,6 @@ function resetStoreVM (store, state, hot) {
 function installModule (store, rootState, path, module, hot) {
   const isRoot = !path.length
   const namespace = store._modules.getNamespace(path)
-
-  // 面试 - path
-  // 1. 相对、绝对
-  // 2. / ~ ./
-  // 3. @ src/ aa/  - alias
 
   // register in namespace map
   // 注册名
