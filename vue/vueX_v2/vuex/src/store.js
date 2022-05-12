@@ -10,7 +10,7 @@ export class Store {
     // Auto install if it is not done yet and `window` has `Vue`.
     // To allow users to avoid auto-installation in some cases,
     // this code should be placed here. See #731
-    // cdn直接引用的方式，可以自动install
+    // cdn直接引用的方式 会 => 自动install。
     if (!Vue && typeof window !== 'undefined' && window.Vue) {
       install(window.Vue)
     }
