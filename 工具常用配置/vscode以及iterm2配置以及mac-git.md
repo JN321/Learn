@@ -14,6 +14,7 @@
 - Auto Rename Tag
 - Auto Close Tag
 - [Deprecated] Bracket Pair Colorizer 2
+- BookMarks - 看源码利器
 ##### settings.json
 ```js
 {

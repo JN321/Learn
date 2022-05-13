@@ -21,7 +21,7 @@ export class Store {
       assert(Vue, `must call Vue.use(Vuex) before creating a store instance.`)
       // 当前环境无法使用promise
       assert(typeof Promise !== 'undefined', `vuex requires a Promise polyfill in this browser.`)
-      // Store必须使用new实例化调用，不操作类，去操作实例。
+      // Store必须使用new实例化调用，不操作类 而是去操作实例。
       assert(this instanceof Store, `store must be called with the new operator.`)
     }
 
@@ -69,6 +69,7 @@ export class Store {
     const store = this
     const { dispatch, commit } = this
     // 确认this为store实例
+    // 确保调用地是当前实例上的dispatch方法，并对dispatch功能赋值。
     this.dispatch = function boundDispatch (type, payload) {
       return dispatch.call(store, type, payload)
     }
@@ -367,8 +368,9 @@ function installModule (store, rootState, path, module, hot) {
   const namespace = store._modules.getNamespace(path)
 
   // register in namespace map
-  // 注册名
+  // 注册名 
   if (module.namespaced) {
+    // 判断 namespace 重名的情况
     if (store._modulesNamespaceMap[namespace] && __DEV__) {
       console.error(`[vuex] duplicate namespace ${namespace} for the namespaced module ${path.join('/')}`)
     }
