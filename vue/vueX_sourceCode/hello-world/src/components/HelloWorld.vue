@@ -1,7 +1,9 @@
 <template>
   <div class="hello">
     <div>{{ title }}</div>
-    <!-- <div>{{ $store.state.name }}</div> -->
+    <div>{{ $store.state.name }}</div>
+    <div>----------getters-----------</div>
+    <div>{{ $store.getters.getAge }}</div>
   </div>
 </template>
 
