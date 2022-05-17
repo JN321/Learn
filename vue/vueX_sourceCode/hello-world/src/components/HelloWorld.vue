@@ -4,6 +4,10 @@
     <div>{{ $store.state.name }}</div>
     <div>----------getters-----------</div>
     <div>{{ $store.getters.getAge }}</div>
+    <div>--------- mutation 通过commit调用 ----------</div>
+    <button @click="$store.commit('changeAge', 5)">同步状态更新</button>
+    <div>--------- action 通过 dispatch 调用 -----------</div>
+    <button @click="$store.dispatch('changeAge', 10)">异步状态更新</button>
   </div>
 </template>
 
