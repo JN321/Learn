@@ -4,12 +4,21 @@
  */
 
 import applyMixin from './mixin'
+import { ModuleCollection } from './modules/moduleCollection'
 
 let Vue
+/**
+ *  1、收集模块转换 为一棵树
+ *  2、安装模块，将模块中的属性，定义在 store 中
+ */
 class Store {
   constructor(options) {
     // Collection 收集
+    // 1、收集模块 转换  为一棵树
     this._modules = new ModuleCollection(options)
+    console.log('this._modules ', this._modules );
+    // 2、安装模块，将模块中的属性，定义在 store 中
+    // installModuls()
   }
   
 }

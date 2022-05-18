@@ -38,8 +38,43 @@ export default new Vuex.Store({
       },
       action: {
         changeAge() {}
+      },
+      modules: {
+        c: {
+          state: {
+            aAge: 100
+          },
+          action: {
+            changeAge() {}
+          }
+        },
+        e: {
+          state: {
+            aAge: 100
+          },
+          action: {
+            changeAge() {}
+          }
+        },
       }
-      
+    },
+    d: {
+      state: {
+        aAge: 100
+      },
+      action: {
+        changeAge() {}
+      },
+      modules: {
+        d: {
+          state: {
+            aAge: 100
+          },
+          action: {
+            changeAge() {}
+          }
+        }
+      }
     }
   }
 })
