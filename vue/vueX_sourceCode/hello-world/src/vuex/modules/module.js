@@ -1,3 +1,5 @@
+import { forEach } from "../util"
+
 export  class Module{
   constructor(newModule) {
     this._row = newModule,
@@ -10,4 +12,18 @@ export  class Module{
   addChild(key, module) {
     this._children[key] = module
   }
+  foreachMutations(fn) {
+    forEach(this._row.mutations, fn)
+  }
+  foreachActions(fn) {
+    forEach(this._row.actions, fn)
+  }
+  foreachGetters(fn) {
+    forEach(this._row.getters, fn)
+  }
+
+  foreachChild(fn) {
+    forEach(this._children, fn)
+  }
+  
 }
