@@ -1,10 +1,15 @@
-import { forEach } from "../util"
+import {
+  forEach
+} from "../util"
 
-export  class Module{
+export class Module {
   constructor(newModule) {
-    this._row = newModule,
-    this._children = {},
+    this._row = newModule
+    this._children = {}
     this.state = newModule.state
+  }
+  get namespaced() {
+    return this._row?.namespace
   }
   getChild(key) {
     return this._children[key]
@@ -21,9 +26,7 @@ export  class Module{
   foreachGetters(fn) {
     forEach(this._row.getters, fn)
   }
-
   foreachChild(fn) {
     forEach(this._children, fn)
   }
-  
 }

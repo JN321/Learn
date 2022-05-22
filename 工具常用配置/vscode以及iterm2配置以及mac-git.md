@@ -15,13 +15,23 @@
 - Auto Close Tag
 - [Deprecated] Bracket Pair Colorizer 2
 - BookMarks - 看源码利器
+
+##### 常用命名
+`control + shift + f` : vscode格式化文档
 ##### settings.json
 ```js
 {
   "window.zoomLevel": 1,
   "editor.tabSize": 2,
   "editor.formatOnSave": true, // eslint保存格式化，
-  "javascript.format.enable": false, // 不启动JavaScript自动格式化
+  "editor.formatOnType": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "javascript.format.enable": false,
+  "bracket-pair-colorizer-2.depreciation-notice": false,
+  "vetur.format.defaultFormatter.html": "js-beautify-html",
+  // "editor.codeActionsOnSave": null, // 不启动JavaScript自动格式化
 }
 ```
 

@@ -1,7 +1,9 @@
 <template>
   <div class="hello">
     <div>{{ title }}</div>
+    <div>--------- state ------------</div>
     <div>{{ $store.state.name }}</div>
+    <div>{{ $store.state.age }}</div>
     <div>----------getters-----------</div>
     <div>{{ $store.getters.getAge }}</div>
     <div>--------- mutation 通过commit调用 ----------</div>

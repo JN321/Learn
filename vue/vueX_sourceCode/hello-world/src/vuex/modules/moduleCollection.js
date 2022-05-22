@@ -1,5 +1,9 @@
-import { forEach } from '../util'
-import { Module } from './module'
+import {
+  forEach
+} from '../util'
+import {
+  Module
+} from './module'
 
 // Collection 收集
 // 通过递归完成module的收集
@@ -7,7 +11,7 @@ import { Module } from './module'
 /**
  * 基础版本 - 未抽离模块
  * 需要将 newModule 以及添加节点、找节点的功能抽离出去
- *  */ 
+ *  */
 // export class ModuleCollection{
 //   constructor(option) {
 //     // register 注册
@@ -40,11 +44,12 @@ import { Module } from './module'
 //     }
 //   }
 // }
+
 /**
  * 进阶版本 - 抽离的module
  * 将 newModule 以及添加节点、找节点的功能抽离出去
- *  */ 
-export class ModuleCollection{
+ * */
+export class ModuleCollection {
   constructor(option) {
     // register 注册
     // 递归的注册模块
@@ -69,5 +74,13 @@ export class ModuleCollection{
         this.register([...path, moduleName], module)
       })
     }
+  }
+  getNameSpace(path) {
+    let root = this.root;
+    return path.reduce((namespace, key) => {
+      // 找出当前的模块
+      root = root.getChild(key)
+      return namespace + (root?.namespaced ? `${key}/` : '')
+    }, '')
   }
 }

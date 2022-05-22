@@ -20,7 +20,7 @@ function vuexInit() {
     // 子组件中可以访问到this.$store
     this.$store = options.parent.$store
   }
-  console.log('this：', this, this.$options);
+  // console.log('this：', this, this.$options);
 }
 
 export default applyMixin
