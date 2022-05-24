@@ -16,6 +16,7 @@ function presists(store) {
 }
 
 export default new Vuex.Store({
+  strice: true, // vuex的严格模式 - 此模式下只能通过mutations修改state状态，其他都不可以。
   plugins: [presists],
   state: {
     name: '这里是vuex',
