@@ -1,0 +1,3 @@
+- `Wathcer` 和 `Dep` 的组合就是发布订阅模式。
+- 一般来说 类库 的打包选择`rollup`,因为打包的体积会小很多，主要的作用是打包js文件。
+- [语雀](https://www.yuque.com/guojw/yp2lh5/vt9w06)
