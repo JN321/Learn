@@ -1,0 +1,5 @@
+{
+  "persets": [
+    "@babel/preset-env"
+  ]
+}
