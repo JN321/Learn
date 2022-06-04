@@ -1,0 +1,14 @@
+{
+  "name": "creat-react-app",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "zhouwen <zhouwen427@163.com>",
+  "homepage": "https://github.com/JN321/Learn#readme",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^9.3.0"
+  },
+  "scripts": {
+    "creat-react-app": "node ./index.js"
+  }
+}
