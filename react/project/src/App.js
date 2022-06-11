@@ -18,6 +18,7 @@ function Layout() {
           <div>两种跳转路由的方式 Link 和 useNavigate钩子</div>
           <Link to="invoice/:666">invoice</Link>
           <a
+            href
             onClick={() => {
               navigate("/dashboard");
             }}
