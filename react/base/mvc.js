@@ -1,69 +1,64 @@
-// init
 (function () {
-  // model
-  var myapp = {}; // 创建这个应用对象
-  myapp.Model = function () {
-    var val = 0;
-    this.add = function (v) {
-      if (val < 100) val += v;
+  const myApp = {};
+  myApp.model = function () {
+    let num = 0;
+    let views = [];
+    this.add = function () {
+      num += 1;
     };
-    this.sub = function (v) {
-      if (val > 0) val -= v;
+    this.sub = function () {
+      num -= 1;
     };
-    this.getVal = function () {
-      return val;
+    this.getData = function () {
+      return num;
     };
-    var self = this,
-      views = [];
-    // 订阅
-    this.register = function (view) {
+    // 收集/订阅
+    this.append = function (view) {
       views.push(view);
     };
     // 通知
     this.notify = function () {
-      for (var i = 0; i < views.length; i++) {
-        views[i].render(self);
-      }
+      views.forEach((v) => {
+        v.render(this.getData());
+      });
     };
   };
 
-  // view
-  myapp.View = function (controller) {
-    var $num = document.getElementById("num"),
-      $incBtn = document.getElementById("#increase"),
-      $decBtn = document.getElementById("#decrease");
-
-    this.render = function (model) {
-      $num.innerHTML = model.getVal() + "rmb";
-    };
+  myApp.view = function (controller) {
+    const num = document.getElementById("num");
+    const addbtn = document.getElementById("add");
+    const subbtn = document.getElementById("subtract");
     /*  绑定事件  */
-    $incBtn.addEventListener("click", controller.increase);
-    $decBtn.addEventListener("click", controller.decrease);
-  };
+    addbtn.addEventListener("click", controller.increase);
+    subbtn.addEventListener("click", controller.subtract);
 
+    this.render = function (value) {
+      num.innerHTML = value;
+    };
+  };
   // controller
-  myapp.Controller = function () {
-    var model = null,
-      view = null;
+  myApp.controller = function () {
+    let model = "",
+      view = "";
     this.init = function () {
       /* 初始化Model和View */
-      model = new myapp.Model();
-      view = new myapp.View(this);
+      model = new myApp.model();
+      view = new myApp.view(this);
       /* View向Model注册，当Model更新就会去通知View啦 */
-      model.register(view);
+      model.append(view);
       model.notify();
     };
     /* 让Model更新数值并通知View更新视图 */
     this.increase = function () {
-      model.add(1);
+      model.add();
       model.notify();
     };
-    this.decrease = function () {
-      model.sub(1);
+    this.subtract = function () {
+      model.sub();
       model.notify();
     };
   };
 
-  var controller = new myapp.Controller();
-  controller.init();
+  const app = new myApp.controller();
+  app.init();
 })();
