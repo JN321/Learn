@@ -7,6 +7,8 @@ import {
   Outlet,
   NavLink,
   useParams,
+  useResolvedPath,
+  useMatch,
 } from "react-router-dom";
 
 function Layout() {
@@ -42,13 +44,22 @@ function Invoices() {
     <div>
       <nav style={{ borderRight: "solid 1px", padding: "1rem" }}>
         {invoicesMenu.map((menu) => (
-          <NavLink
-            style={{ marginRight: "8px" }}
+          // <NavLink
+          //   style={{ marginRight: "8px" }}
+          //   to={`/invoices/${menu.value}`}
+          //   key={menu.value}
+          // >
+          //   {menu.lable}
+          // </NavLink>
+
+          // 自定义Link
+          <CustomLink
             to={`/invoices/${menu.value}`}
             key={menu.value}
+            style={{ marginRight: "8px" }}
           >
             {menu.lable}
-          </NavLink>
+          </CustomLink>
         ))}
       </nav>
       <Outlet />
@@ -58,11 +69,10 @@ function Invoices() {
 
 function Invoice() {
   const param = useParams();
-  console.log("param", param?.invoiceId);
   return (
     <div style={{ padding: "1rem" }}>
       <h2>这里是Invoice</h2>
-      <h3>{param?.invoiceId}</h3>
+      <h3>路由传值为 {param?.invoiceId}</h3>
     </div>
   );
 }
@@ -73,6 +83,24 @@ function Expenses() {
 
 function NoFound() {
   return <h2>404</h2>;
+}
+
+function CustomLink({ children, to, ...props }) {
+  let resolve = useResolvedPath(to);
+  let match = useMatch({ path: resolve.pathname, end: true });
+  console.log("match", match);
+  return (
+    <div>
+      <Link
+        style={{ textDecoration: match ? "underLine" : "none" }}
+        to={to}
+        {...props}
+      >
+        {children}
+      </Link>
+      {match && "(active)"}
+    </div>
+  );
 }
 
 export default function MenuRoute() {

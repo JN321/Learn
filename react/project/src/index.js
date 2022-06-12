@@ -1,15 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-// import App from './App';
-import MenuRoute from "./router_practice";
+// import App from './App'; // 基础router练习
+// import MenuRoute from "./router_practice"; // 基础router练习
+import MyBrowserRouter from "./myBrowserRouter/index"; // 实现一个简易的 BrowerRouter
 import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     {/* <App /> */}
-    <MenuRoute />
+    {/* <MenuRoute /> */}
+    <MyBrowserRouter />
   </React.StrictMode>
 );
 
