@@ -86,7 +86,9 @@ function NoFound() {
 }
 
 function CustomLink({ children, to, ...props }) {
+  // 通过to匹配到完整的路由信息
   let resolve = useResolvedPath(to);
+  // 通过path返回匹配到的route
   let match = useMatch({ path: resolve.pathname, end: true });
   console.log("match", match);
   return (
