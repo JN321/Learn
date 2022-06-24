@@ -9,7 +9,12 @@ export default class Provider extends Component {
 
     constructor(props, context){
         super(props, context)
+        // 这里写错了。
         this.store = props.store
+    }
+
+    getChildContext() {
+      return { store: this.store }
     }
 
   render() {

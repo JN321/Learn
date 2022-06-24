@@ -95,6 +95,123 @@ react-redux 的核心就是
 - redux 不会触发界面更新
 - react-redux， 用 Context 的 provider 和 consumer 把 redux 的 store 串了起来。
 
+#### 实现1：
+使用context 的方法，模板定义 Provider ,
+类写法传递 store
+```js
+// index.js
+import Provider from './store/Provider';
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+);
+
+// Provider.js
+import React, { Component } from 'react'
+import PropTypes from 'prop-types';
+
+export default class Provider extends Component {
+
+    static childContextTypes = {
+        store: PropTypes.object
+    }
+
+    constructor(props, context){
+        super(props, context)
+        // 这里写错了。
+        this.store = props.store
+    }
+
+    getChildContext() {
+      return { store: this.store }
+    }
+
+  render() {
+    return this.props.children
+  }
+}
+
+// connect.js
+import { PropTypes } from 'prop-types';
+import React, { useContext, useState, useEffect } from 'react';
+export const connect = (mapStateToProps, mapDispatchToProps) => Component => {
+    class Connect extends React.Component {
+        componentDidMount() {
+            this.context.store.subscribe(this.handleStoreChange.bind(this));
+            console.log('this.comtext', this.context);
+        }
+        handleStoreChange(){
+            this.forceUpdate()
+        }
+        render () {
+            return (
+                <div>
+                    <Component
+                        {...this.props}
+                        {...mapStateToProps(this.context.store.getState())}
+                        {...mapDispatchToProps(this.context.store.dispatch)}
+                    />
+                    {/* <div>{JSON.stringify(this.context.store.getState())}</div> */}
+                    {/* hello */}
+                </div>
+            )
+        }
+    }
+    Connect.contextTypes = {
+        store: PropTypes
+    }
+    return Connect;
+}
+
+```
+
+#### 实现2：
+
+createContext
+```js
+// index.js
+import ReduxContext from './store/context';
+ReactDOM.render(
+  
+  <ReduxContext.Provider value={store}>
+    <App />
+  </ReduxContext.Provider>,
+  document.getElementById('root')
+);
+
+// Provider.js
+// 不需要
+
+// connect
+import React, { useContext, useState, useEffect } from 'react';
+import ReduxContext from './context';
+export const connect = (mapStateToProps, mapDispatchToProps) => Component => {
+    function Connect(props) {
+        const store = useContext(ReduxContext);
+        const [, setCount] = useState(true);
+        const forceUpdate = () => setCount(val => !val);
+        useEffect(() => store.subscribe(forceUpdate), []);
+        return (
+            <ReduxContext.Consumer>
+                {
+                    store => <>
+                    <Component
+                        {...props}
+                        {...mapStateToProps(store.getState())}
+                        {...mapDispatchToProps(store.dispatch)}
+                    />
+                    <div>{JSON.stringify(store.getState())}</div>
+                    </>
+                }
+            </ReduxContext.Consumer>
+        )
+    }
+    return Connect;
+}
+```
 
 ## mobx (20-30%)
 - Vue react 不是很喜欢用；

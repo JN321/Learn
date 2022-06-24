@@ -1,44 +1,30 @@
-import PropTypes from 'prop-types';
-import React, { useContext, useState,useEffect } from 'react';
-import ReduxContext from './context';
-export const connect = (mapStateToProps, mapDispatchToProps) => Component => 
-    {
-        class Connect extends React.Component {
-            componentDidMount() {
-                this.context.subscribe(this.handleStoreChange.bind(this))
-            }
-            handleStoreChange(){
-                this.forceUpdate()
-            }
-            render () {
-                return (
+import { PropTypes } from 'prop-types';
+import React, { useContext, useState, useEffect } from 'react';
+export const connect = (mapStateToProps, mapDispatchToProps) => Component => {
+    class Connect extends React.Component {
+        componentDidMount() {
+            this.context.store.subscribe(this.handleStoreChange.bind(this));
+            // console.log('this.context', this.context);
+        }
+        handleStoreChange(){
+            this.forceUpdate()
+        }
+        render () {
+            return (
+                <div>
                     <Component
-                            {...this.props}
-                            {...mapStateToProps(this.context.store.getState())}
-                            {...mapDispatchToProps(this.context.store.dispatch)}
-                        />
-                )
-            }
+                        {...this.props}
+                        {...mapStateToProps(this.context.store.getState())}
+                        {...mapDispatchToProps(this.context.store.dispatch)}
+                    />
+                    {/* <div>{JSON.stringify(this.context.store.getState())}</div> */}
+                    {/* hello */}
+                </div>
+            )
         }
-        Connect.contextTypes = {
-            store: PropTypes
-        }
-        return Connect;
     }
-    // function Connect(props) {
-    //     const store = useContext(ReduxContext);
-    //     const [, setCount] = useState(true);
-    //     const forceUpdate = () => setCount(val => !val);
-    //     useEffect(()=> store.subscribe(forceUpdate), [])
-    //     return (
-    //         <ReduxContext.Consumer>
-    //             {
-    //                 store => <Component
-    //                     {...props}
-    //                     {...mapStateToProps(store.getState())}
-    //                     {...mapDispatchToProps(store.dispatch)}
-    //                 />
-    //             }
-    //         </ReduxContext.Consumer>
-    //     )
-    // }
+    Connect.contextTypes = {
+        store: PropTypes
+    }
+    return Connect;
+}

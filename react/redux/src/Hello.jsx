@@ -1,6 +1,6 @@
 import React from 'react';
 // import { connect } from 'react-redux';
-import { connect } from './store/connect';
+import { connect } from './store/connectValue';
 
 function Hello(props) {
     return (
