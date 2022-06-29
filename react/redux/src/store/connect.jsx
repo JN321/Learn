@@ -1,5 +1,5 @@
 import { PropTypes } from 'prop-types';
-import React, { useContext, useState, useEffect } from 'react';
+import React from 'react';
 export const connect = (mapStateToProps, mapDispatchToProps) => Component => {
     class Connect extends React.Component {
         componentDidMount() {
@@ -17,8 +17,6 @@ export const connect = (mapStateToProps, mapDispatchToProps) => Component => {
                         {...mapStateToProps(this.context.store.getState())}
                         {...mapDispatchToProps(this.context.store.dispatch)}
                     />
-                    {/* <div>{JSON.stringify(this.context.store.getState())}</div> */}
-                    {/* hello */}
                 </div>
             )
         }
