@@ -104,7 +104,7 @@ const hostConfig = {
   },
   clearContainer() {},
 };
-const ReactReconcilerInst = ReactReconciler(hostConfig);
+const ReactReconcilerInst = ReactReconciler(traceWrap(hostConfig));
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   render: (reactElement, domElement, callback) => {
