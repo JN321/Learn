@@ -1,56 +1,47 @@
 // 手写一个发布订阅
-
 function EventEmitter() {
-    this._events = {};
+  this._events = {};
 }
-
-EventEmitter.prototype.on = function(eventName, callback) {
-    if(!this._events) this._events = {};
-    let eventCbList = this._events[eventName] || (this._events[eventName] = []);
-    // 
-    eventCbList.push(callback);
-    // return () => this.off(eventName, callback);
+EventEmitter.prototype.on = function (name, cb) {
+  if (!this._events) this._events = {};
+  if (!this._events[name]) this._events[name] = [];
+  this._events[name].push(cb);
 };
 
-EventEmitter.prototype.emit = function(eventName, ...rest) {
-    this._events[eventName] && this._events[eventName].forEach(cb => cb(...rest));
+EventEmitter.prototype.emit = function (name, ...res) {
+  if (!this._events[name]) return false;
+  this._events[name].forEach((cb) => cb(...res));
 };
 
-EventEmitter.prototype.off = function(eventName, callback) {
-    if(!this._events) this._events = {};
-    if(this._events[eventName]) {
-        this._events[eventName] = this._events[eventName].filter(item => (item != callback) && (item.cb !== callback));
-    }
+EventEmitter.prototype.off = function (name, cb) {
+  if (!this._events[name]) return false;
+  this._events[name] = this._events[name].filter(
+    (callback) => callback !== cb && callback.callback !== cb
+  );
 };
 
-// 我只执行一次。
-EventEmitter.prototype.once = function(eventName, callback) {
-    const once = (...rest) => {
-        callback(...rest);
-        this.off(eventName, once);
-    }
+EventEmitter.prototype.once = function (name, cb) {
+  const once = (...res) => {
+    cb(...res);
+    this.off(name, once);
+  };
+  cb.callback = cb;
+  this.on(name, once);
+};
 
-    once.cb = callback;
-    this.on(eventName, once);
-}
-
-
-
-// 
+//
 
 const e = new EventEmitter();
-e.on('data', function(msg) {
-    console.log('hello' + msg);
-});
+// e.on("data", function (msg) {
+//   console.log("hello" + msg);
+// });
 
-const handle = function(msg) {
-    console.log('hello2' + msg);
-
-}
-e.once('data', handle);
+const handle = function (msg) {
+  console.log("hello2" + msg);
+};
+e.once("data", handle);
 setTimeout(() => {
-    e.emit('data', 'msg');
-    // e.off('data', handle);
-    e.emit('data', 'msg');
-
-},500)
+  e.emit("data", "msg");
+  // e.off('data', handle);
+  e.emit("data", "msg");
+}, 500);

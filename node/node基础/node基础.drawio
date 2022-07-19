@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e" pages="4">
     <diagram id="RZo6h0mKFRFqbQKAO6PP" name="编程结构">
-        <mxGraphModel dx="728" dy="529" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="559" dy="255" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -26,7 +26,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="0o4XqN-6mh_Fb4-IEZpj" name="Node内核">
-        <mxGraphModel dx="541" dy="485" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="559" dy="255" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="Lwd97wdaWczjN51kTAib-0"/>
                 <mxCell id="Lwd97wdaWczjN51kTAib-1" parent="Lwd97wdaWczjN51kTAib-0"/>
@@ -64,7 +64,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="eNG4zSXUfG2Y5ava8TqG" name="npm install">
-        <mxGraphModel dx="1368" dy="485" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="#ffffff" math="0" shadow="1">
+        <mxGraphModel dx="1386" dy="255" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="#ffffff" math="0" shadow="1">
             <root>
                 <mxCell id="Wzgnef5kSkw1GUKjvik6-0"/>
                 <mxCell id="Wzgnef5kSkw1GUKjvik6-1" parent="Wzgnef5kSkw1GUKjvik6-0"/>
