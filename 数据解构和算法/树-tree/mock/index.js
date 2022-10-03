@@ -13,6 +13,7 @@ const binaryTree = {
           right: null,
         },
       },
+      val: "cc",
     },
     right: {
       left: {
@@ -20,6 +21,7 @@ const binaryTree = {
         left: null,
         right: null,
       },
+      val: "dd",
     },
   },
   right: {
@@ -28,6 +30,7 @@ const binaryTree = {
       left: { val: 6, left: null, right: null },
       right: { val: 7, left: null, right: null },
     },
+    val: "ee",
   },
 };
 

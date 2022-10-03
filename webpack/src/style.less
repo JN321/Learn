@@ -1,0 +1,18 @@
+@200: 200px;
+
+#app{
+ background-color: burlywood;
+}
+
+.main {
+  background-color: cadetblue;
+  &>span {
+    display: block;
+    width: @200;
+    height: @200;
+    background-color: blue;
+    &:hover{
+      background-color:blueviolet;
+    }
+  }
+  }

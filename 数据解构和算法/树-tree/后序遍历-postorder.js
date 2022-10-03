@@ -15,3 +15,10 @@ const postorder = (node) => {
 postorder(binaryTree);
 
 // 输出 8 4 5 2 6 7 3 1
+
+const postorder = (node) => {
+  if (!node) return false;
+  const stack = [node];
+  const postStack = [];
+  while (stack.length) {}
+};
