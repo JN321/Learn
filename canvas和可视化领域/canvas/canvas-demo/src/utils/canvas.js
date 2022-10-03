@@ -4,7 +4,7 @@
 
 import { WIDTH, HEIGHT } from "./constant";
 
-export class Canvas {
+export default class Canvas {
   constructor() {
     this.el = document.createElement("canvas");
   }
