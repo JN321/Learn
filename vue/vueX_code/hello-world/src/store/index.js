@@ -44,7 +44,7 @@ export default new Vuex.Store({
 
   // 1、默认模块没有作用域
   // 2、状态不要和模块名重名
-  // 3、计算属性getters 可直接通过getters取值
+  // 3、计算属性 getters 可直接通过 getters 取值
   // 4、增加namespace: true，用于划分命名空间。会将这个模块的属性，封装至该模块下
   // 5、默认会找当前模块上是否有 namespace:true, 并将父级的namespace一同算上，做成命名空间
   modules: {

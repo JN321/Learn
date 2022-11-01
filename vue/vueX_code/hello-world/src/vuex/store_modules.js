@@ -114,6 +114,7 @@ function resetStoreVm(store, state) {
     },
     computed
   })
+  // 使用时通过 this.$store.state.xxx.xxx.xx 获取值
 }
 
 let Vue
@@ -126,7 +127,7 @@ class Store {
     // Collection 收集
     // --------------- 1、收集模块 => 树 便于理解和后续的处理 ------------
     this._modules = new ModuleCollection(options)
-    // console.log('this._modules ', this._modules);
+    console.log('this._modules ', this._modules);
 
     // ----------- 2、安装模块，将模块中的属性，定义在 store 中。------------
     this._mutations = {}
@@ -135,9 +136,13 @@ class Store {
     const state = this._modules.root.state
     installModuls(this, state, [], this._modules.root)
     this._subscribers = []
-    // console.log('_mutations', this._mutations);
-    // console.log('_actions', this._actions);
-    // console.log('_wrapperGetters', this._wrapperGetters);
+
+    console.log('this._mutations -->', this._mutations );
+    console.log('this._actions -->', this._mutations );
+    console.log('this._wrapperGetters -->', this._mutations );
+    console.log('this._subscribers -->', this._subscribers );
+    console.log('state -->', state );
+
 
     // ----- 通过上述操作得到了state、getters。如何实现响应式的数据呢？---------
     resetStoreVm(this, state)
@@ -165,9 +170,13 @@ class Store {
 
 }
 
+/**
+ * install 会在 Vue.use(Vuex) 时被调用，入参是一个 Vue 实例。
+ * install 将 store 的实例挂载在了 Vue 实例上。
+ * 每一个 Vue 实例，都可以通过 this.$store 访问到 Vuex。
+ **/ 
 const install = (_Vue) => {
   Vue = _Vue
-  // console.log('Vue: ', Vue);
   applyMixin(Vue)
 }
 
